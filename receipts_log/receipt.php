@@ -240,26 +240,26 @@ if ($_SESSION["authority"] == "reviewer") {
                                 case "廠商金支付":
                                     echo "
                                     <label><input type=\"radio\" name=\"payment_method\" value=\"廠商金支付\" checked required>廠商金支付</label>
-                                    <label><input type=\"radio\" name=\"payment_method\" value=\"換零金支付\" required>換零金支付</label><br />
+                                    <label><input type=\"radio\" name=\"payment_method\" value=\"換錢金支付\" required>換錢金支付</label><br />
                                     ";
                                     break;
-                                case "換零金支付":
+                                case "換錢金支付":
                                     echo "
                                     <label><input type=\"radio\" name=\"payment_method\" value=\"廠商金支付\" required>廠商金支付</label>
-                                    <label><input type=\"radio\" name=\"payment_method\" value=\"換零金支付\" checked required>換零金支付</label><br />
+                                    <label><input type=\"radio\" name=\"payment_method\" value=\"換錢金支付\" checked required>換錢金支付</label><br />
                                     ";
                                     break;
                                 default:
                                     echo "
                                     <label><input type=\"radio\" name=\"payment_method\" value=\"廠商金支付\" checked required>廠商金支付</label>
-                                    <label><input type=\"radio\" name=\"payment_method\" value=\"換零金支付\" required>換零金支付</label><br />
+                                    <label><input type=\"radio\" name=\"payment_method\" value=\"換錢金支付\" required>換錢金支付</label><br />
                                     ";
                                     break;
                             }
                         } else {
                             echo "
                             <label><input type=\"radio\" name=\"payment_method\" value=\"廠商金支付\" checked required>廠商金支付</label>
-                            <label><input type=\"radio\" name=\"payment_method\" value=\"換零金支付\" required>換零金支付</label><br />
+                            <label><input type=\"radio\" name=\"payment_method\" value=\"換錢金支付\" required>換錢金支付</label><br />
                             ";
                         }
                         ?>
