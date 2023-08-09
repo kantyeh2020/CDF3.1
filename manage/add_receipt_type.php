@@ -35,9 +35,11 @@ try {
         $sthAdd->execute($dataAdd);
     } else {
         echo json_encode('新增失敗，改憑證類型名稱已經存在。', JSON_UNESCAPED_UNICODE);
+        exit;
     }
 } catch (PDOException $e) {
     echo json_encode('無法新增憑證類型：' . $e->getMessage(), JSON_UNESCAPED_UNICODE);
+    exit;
 }
 
 // 更新憑證類型資訊
