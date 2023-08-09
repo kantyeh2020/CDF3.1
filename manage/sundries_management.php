@@ -406,7 +406,7 @@ if (!(isset($_SESSION["authority"]) && $_SESSION["authority"] == "manager")) {
             $('#receipt_type_add_button').remove();
             var width = 100;
             $('#receipt_type_table').children('tbody').append("<tr id=\"new_receipt_type_info\"> <td align=\"center\">新</td><td align='center' valign=\"middle\"><input type=\"text\" name=\"new_receipt_type_class\" placeholder=\"請填入新的憑證類型名稱\" style=\"width:" + width + "px\" required></td></tr>")
-            $('#receipt_type_table').parent().append("<div id=\"new_receipt_type_button\">&nbsp;<input type=\"button\" value=\"新增\">&nbsp;<input type=\"button\" onclick=\"cancelAddReceiptType()\" value=\"取消\">&nbsp;</div>");
+            $('#receipt_type_table').parent().append("<div id=\"new_receipt_type_button\">&nbsp;<input type=\"button\" onclick=\"confirmAddReceiptType()\" value=\"新增\">&nbsp;<input type=\"button\" onclick=\"cancelAddReceiptType()\" value=\"取消\">&nbsp;</div>");
         }
 
         function cancelAddReceiptType() {
