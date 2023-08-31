@@ -67,8 +67,8 @@ if ($one < 0 || $five < 0 || $ten < 0 || $fifty < 0 || $hundred < 0 || $fiveHund
 include "jquery_connect_mysql.php";
 
 // 更新儲備金狀態
-$data = [$one, $five, $ten, $fifty, $hundred, $fiveHundred, $thousand, $total];
-$sql = "INSERT INTO cash_reserve_management(start_date, ones, five, ten, fifty, hundred, five_hundred, thousand, total) VALUES ((CURDATE()), ?, ?, ?, ?, ?, ?, ?, ?)";
+$data = [$one, $five, $ten, $fifty, $hundred, $fiveHundred, $thousand, $total, $_SESSION["restaurant"]];
+$sql = "INSERT INTO cash_reserve_management(start_date, ones, five, ten, fifty, hundred, five_hundred, thousand, total, restaurant_id) VALUES ((CURDATE()), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $sth = $link->prepare($sql);
 try {
     $sth->execute($data);
@@ -79,10 +79,11 @@ try {
 }
 
 // 更新SESSION內的儲備金資訊
-$sql = "SELECT * FROM cash_reserve_management ORDER BY id DESC LIMIT 1";
+$data = [$_SESSION["restaurant_id"]];
+$sql = "SELECT * FROM cash_reserve_management WHERE restaurant_id=? ORDER BY id DESC LIMIT 1";
 $stmt = $link->prepare($sql);
 try {
-    $stmt->execute();
+    $stmt->execute($data);
     $dCRMResult = $stmt->fetch(PDO::FETCH_ASSOC);
     $_SESSION["dCRM_id"] = $dCRMResult["id"];
     $_SESSION["dCRM_ones"] = $dCRMResult["ones"];

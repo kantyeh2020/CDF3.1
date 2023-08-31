@@ -32,6 +32,8 @@ if (!(isset($_SESSION["authority"]) && $_SESSION["authority"] == "reviewer")) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
     <title>憑證資訊</title>
 </head>
 
@@ -49,10 +51,10 @@ if (!(isset($_SESSION["authority"]) && $_SESSION["authority"] == "reviewer")) {
             <th align=\"center\">&nbsp;項次&nbsp;</th>
             <th align=\"center\">&nbsp;費用公司&nbsp;</th>
             <th align=\"center\">&nbsp;申請人&nbsp;</th>
-            <th align=\"center\">&nbsp;登錄日期&nbsp;</th>
+            <th align=\"center\">&nbsp;申請日期&nbsp;</th>
             <th align=\"center\">&nbsp;費用歸屬&nbsp;<br/>&nbsp;母專案科目&nbsp;</th>
             <th align=\"center\">&nbsp;費用歸屬&nbsp;<br/>&nbsp;子專案科目&nbsp;</th>
-            <th align=\"center\">&nbsp;費用歸屬&nbsp;<br/>&nbsp;費用別&nbsp;</th>
+            <th align=\"center\">&nbsp;費用歸屬&nbsp;<br/>&nbsp;分碼&nbsp;</th>
             <th align=\"center\">&nbsp;憑證類型&nbsp;</th>
             <th align=\"center\">&nbsp;憑證編號&nbsp;</th>
             <th align=\"center\">&nbsp;付款日期&nbsp;</th>
@@ -108,9 +110,21 @@ if (!(isset($_SESSION["authority"]) && $_SESSION["authority"] == "reviewer")) {
             exit;
         }
         ?>
+        <button id="btnExport" onclick="exportReportToExcel(this)">匯出成Excel檔</button>
     </fieldset>
     <br />
     <a href="receipts_reroute.php"><button>上一頁</button></a>
+    <script>
+        function exportReportToExcel() {
+            let table = document.getElementsByTagName('table'); // you can use document.getElementById('tableId') as well by providing id to the table tag
+            TableToExcel.convert(table[0], { // html code may contain multiple tables so here we are refering to 1st table tag
+                name: `憑證資訊.xlsx`, // fileName you could use any name
+                sheet: {
+                    name: '憑證資訊' // sheetName
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

@@ -36,8 +36,8 @@ if ($total < 0) {
 include "jquery_connect_mysql.php";
 
 // 更新換錢金狀態
-$data = [$total];
-$sql = "INSERT INTO exchange_cash_management(start_date, total) VALUES ((CURDATE()), ?)";
+$data = [$total, $_SESSION["restaurant_id"]];
+$sql = "INSERT INTO exchange_cash_management(start_date, total, restaurant_id) VALUES ((CURDATE()), ?, ?)";
 $sth = $link->prepare($sql);
 try {
     $sth->execute($data);
@@ -48,10 +48,11 @@ try {
 }
 
 // 更新SESSION內的換錢金資訊
-$sql = "SELECT * FROM exchange_cash_management ORDER BY id DESC LIMIT 1";
+$data = [$_SESSION["restaurant_id"]];
+$sql = "SELECT * FROM exchange_cash_management WHERE restaurant_id=? ORDER BY id DESC LIMIT 1";
 $stmt = $link->prepare($sql);
 try {
-    $stmt->execute();
+    $stmt->execute($data);
     $dECMResult = $stmt->fetch(PDO::FETCH_ASSOC);
     $_SESSION["dECM_id"] = $dECMResult["id"];
     $_SESSION["dECM_total"] = $dECMResult["total"];

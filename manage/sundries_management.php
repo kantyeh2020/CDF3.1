@@ -71,10 +71,11 @@ if (!(isset($_SESSION["authority"]) && $_SESSION["authority"] == "manager")) {
             </tr>";
 
             // 輸出儲備金資料
-            $sql = "SELECT * FROM cash_reserve_management ORDER BY id DESC LIMIT 1";
+            $data = [$_SESSION["restaurant_id"]];
+            $sql = "SELECT * FROM cash_reserve_management WHERE restaurant_id=? ORDER BY id DESC LIMIT 1";
             $sth = $link->prepare($sql);
             try {
-                $sth->execute();
+                $sth->execute($data);
                 if ($result = $sth->fetch(PDO::FETCH_ASSOC)) {
                     echo "<tr>
                     <td align='center' id=\"cash_reserve_start_date\" valign=\"middle\">&emsp;{$result["start_date"]}&emsp;</td>
@@ -111,10 +112,11 @@ if (!(isset($_SESSION["authority"]) && $_SESSION["authority"] == "manager")) {
             </tr>";
 
             // 輸出換錢金資料
-            $sql = "SELECT * FROM exchange_cash_management ORDER BY id DESC LIMIT 1";
+            $data = [$_SESSION["restaurant_id"]];
+            $sql = "SELECT * FROM exchange_cash_management WHERE restaurant_id=? ORDER BY id DESC LIMIT 1";
             $sth = $link->prepare($sql);
             try {
-                $sth->execute();
+                $sth->execute($data);
                 if ($result = $sth->fetch(PDO::FETCH_ASSOC)) {
                     echo "<tr>
                     <td align='center' id=\"exchange_cash_start_date\" valign=\"middle\">&emsp;{$result["start_date"]}&emsp;</td>
@@ -147,10 +149,11 @@ if (!(isset($_SESSION["authority"]) && $_SESSION["authority"] == "manager")) {
             </tr>";
 
             // 輸出廠商金資料
-            $sql = "SELECT * FROM company_cash_management ORDER BY id DESC LIMIT 1";
+            $data = [$_SESSION["restaurant_id"]];
+            $sql = "SELECT * FROM company_cash_management WHERE restaurant_id=? ORDER BY id DESC LIMIT 1";
             $sth = $link->prepare($sql);
             try {
-                $sth->execute();
+                $sth->execute($data);
                 if ($result = $sth->fetch(PDO::FETCH_ASSOC)) {
                     echo "<tr>
                     <td align='center' id=\"company_cash_start_date\" valign=\"middle\">&emsp;{$result["start_date"]}&emsp;</td>
