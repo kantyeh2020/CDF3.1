@@ -92,9 +92,10 @@ if ($empResult && $restaurantResult && $empResult["emp_password"] == $_SESSION["
 }
 
 // 獲得預設的錢櫃儲備金資訊
-$sql = "SELECT * FROM cash_reserve_management ORDER BY id DESC LIMIT 1";
+$data = [$_SESSION["restaurant_id"]];
+$sql = "SELECT * FROM cash_reserve_management WHERE restaurant_id=? ORDER BY id DESC LIMIT 1";
 $stmt = $link->prepare($sql);
-$stmt->execute();
+$stmt->execute($data);
 $dCRMResult = $stmt->fetch(PDO::FETCH_ASSOC);
 $_SESSION["dCRM_id"] = $dCRMResult["id"];
 $_SESSION["dCRM_ones"] = $dCRMResult["ones"];
@@ -107,17 +108,19 @@ $_SESSION["dCRM_thousand"] = $dCRMResult["thousand"];
 $_SESSION["dCRM_total"] = $dCRMResult["total"];
 
 // 獲得預設的換錢金資訊
-$sql = "SELECT * FROM exchange_cash_management ORDER BY id DESC LIMIT 1";
+$data = [$_SESSION["restaurant_id"]];
+$sql = "SELECT * FROM exchange_cash_management WHERE restaurant_id=? ORDER BY id DESC LIMIT 1";
 $stmt = $link->prepare($sql);
-$stmt->execute();
+$stmt->execute($data);
 $dECMResult = $stmt->fetch(PDO::FETCH_ASSOC);
 $_SESSION["dECM_id"] = $dECMResult["id"];
 $_SESSION["dECM_total"] = $dECMResult["total"];
 
 // 獲得預設的廠商金資訊
-$sql = "SELECT * FROM company_cash_management ORDER BY id DESC LIMIT 1";
+$data = [$_SESSION["restaurant_id"]];
+$sql = "SELECT * FROM company_cash_management WHERE restaurant_id=? ORDER BY id DESC LIMIT 1";
 $stmt = $link->prepare($sql);
-$stmt->execute();
+$stmt->execute($data);
 $dCCMResult = $stmt->fetch(PDO::FETCH_ASSOC);
 $_SESSION["dCCM_id"] = $dCCMResult["id"];
 $_SESSION["dCCM_total"] = $dCCMResult["total"];

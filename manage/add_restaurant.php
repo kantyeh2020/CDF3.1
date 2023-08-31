@@ -56,8 +56,34 @@ $sth = $link->prepare($sql);
 $sth->execute($data);
 try {
     if (!($result = $sth->fetch(PDO::FETCH_ASSOC))) {
+        // 新增餐廳
         $dataRes = [$newRestaurantBrandName . "_" . $_POST["new_restaurant_name"]];
         $sqlRes = "INSERT INTO restaurant(restaurant_name) VALUES (?)";
+        $sthRes = $link->prepare($sqlRes);
+        $sthRes->execute($dataRes);
+
+        // 獲取新餐廳的id
+        $sqlRes = "SELECT * FROM restaurant WHERE restaurant_name=?";
+        $sthRes = $link->prepare($sqlRes);
+        $sthRes->execute($dataRes);
+        $resultRes = $sthRes->fetch(PDO::FETCH_ASSOC);
+        $newRestaurantId = $resultRes["restaurant_id"];
+
+        // 新增儲備金資訊
+        $dataRes = [$newRestaurantId];
+        $sqlRes = "INSERT INTO cash_reserve_management(start_date, restaurant_id) VALUES ((CURRENT()), ?)";
+        $sthRes = $link->prepare($sqlRes);
+        $sthRes->execute($dataRes);
+
+        // 新增換錢金資訊
+        $dataRes = [$newRestaurantId];
+        $sqlRes = "INSERT INTO exchange_cash_management(start_date, restaurant_id) VALUES ((CURRENT()), ?)";
+        $sthRes = $link->prepare($sqlRes);
+        $sthRes->execute($dataRes);
+
+        // 新增廠商金資訊
+        $dataRes = [$newRestaurantId];
+        $sqlRes = "INSERT INTO company_cash_management(start_date, restaurant_id) VALUES ((CURRENT()), ?)";
         $sthRes = $link->prepare($sqlRes);
         $sthRes->execute($dataRes);
     } else if ($result["restaurant_status"] == "closed" && $result["restaurant_name"] == $newRestaurantBrandName . "_" . $_POST["new_restaurant_name"]) {

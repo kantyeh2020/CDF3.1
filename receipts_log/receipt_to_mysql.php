@@ -143,9 +143,9 @@ $sth = $link->prepare($sql);
 try {
     if ($sth->execute($data)) {
         if ($_SESSION["receipt_type"] == "發票") { // 發票時
-            echo "<script>alert(\"憑證的資訊提交成功：\\n\\n提交者：{$_SESSION["emp_name"]}\\n餐廳：{$_SESSION["restaurant_name"]}\\n提交日期：{$_SESSION["login_date"]}\\n憑證母科目：{$_SESSION["main_project"]}\\n憑證子科目：{$_SESSION["sub_project"]}\\n憑證費用別：{$_SESSION["subject_id"]}\\n憑證類型：{$_SESSION["receipt_type"]}\\n發票編號：{$_SESSION["receipt_id_number"]}\\n付款日期：{$_SESSION["buying_date"]}\\n廠商名稱：{$_SESSION["selling_company"]}\\n支付金額：{$_SESSION["total_price"]}元\\n支付方式：{$_SESSION["payment_method"]}\\n費用明細：{$_SESSION["detail"]}\\n備註：{$_SESSION["comments"]}\\n\\n即將跳回憑證提交頁面。\");</script>";
+            echo "<script>alert(\"憑證的資訊提交成功：\\n\\n提交者：{$_SESSION["emp_name"]}\\n餐廳：{$_SESSION["restaurant_name"]}\\n提交日期：{$_SESSION["login_date"]}\\n憑證母科目：{$_SESSION["main_project"]}\\n憑證子科目：{$_SESSION["sub_project"]}\\n憑證費用別：{$_SESSION["subject_id"]}\\n憑證類型：{$_SESSION["receipt_type"]}\\n發票編號：{$_SESSION["receipt_id_number"]}\\n付款日期：{$_SESSION["buying_date"]}\\n廠商名稱：{$_SESSION["selling_company"]}\\n支付金額：{$_SESSION["total_price"]}元\\n支付方式：{$_SESSION["payment_method"]}\\n費用明細：{$detail}\\n備註：{$comments}\\n\\n即將跳回憑證提交頁面。\");</script>";
         } else { // 收據、合約、請款單時
-            echo "<script>alert(\"憑證的資訊提交成功：\\n\\n提交者：{$_SESSION["emp_name"]}\\n餐廳：{$_SESSION["restaurant_name"]}\\n提交日期：{$_SESSION["login_date"]}\\n憑證母科目：{$_SESSION["main_project"]}\\n憑證子科目：{$_SESSION["sub_project"]}\\n憑證費用別：{$_SESSION["subject_id"]}\\n付款日期：{$_SESSION["buying_date"]}\\n廠商名稱：{$_SESSION["selling_company"]}\\n支付金額：{$_SESSION["total_price"]}元\\n支付方式：{$_SESSION["payment_method"]}\\n費用明細：{$_SESSION["detail"]}\\n備註：{$_SESSION["comments"]}\\n\\n即將跳回憑證提交頁面。\");</script>";
+            echo "<script>alert(\"憑證的資訊提交成功：\\n\\n提交者：{$_SESSION["emp_name"]}\\n餐廳：{$_SESSION["restaurant_name"]}\\n提交日期：{$_SESSION["login_date"]}\\n憑證母科目：{$_SESSION["main_project"]}\\n憑證子科目：{$_SESSION["sub_project"]}\\n憑證費用別：{$_SESSION["subject_id"]}\\n付款日期：{$_SESSION["buying_date"]}\\n廠商名稱：{$_SESSION["selling_company"]}\\n支付金額：{$_SESSION["total_price"]}元\\n支付方式：{$_SESSION["payment_method"]}\\n費用明細：{$detail}\\n備註：{$comments}\\n\\n即將跳回憑證提交頁面。\");</script>";
         }
         $link = NULL;
         // 清空憑證資訊

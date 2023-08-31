@@ -36,8 +36,8 @@ if ($total < 0) {
 include "jquery_connect_mysql.php";
 
 // 更新廠商金狀態
-$data = [$total];
-$sql = "INSERT INTO company_cash_management(start_date, total) VALUES ((CURDATE()), ?)";
+$data = [$total, $_SESSION["restaurant_id"]];
+$sql = "INSERT INTO company_cash_management(start_date, total, restaurant_id) VALUES ((CURDATE()), ?, ?)";
 $sth = $link->prepare($sql);
 try {
     $sth->execute($data);
@@ -48,10 +48,11 @@ try {
 }
 
 // 更新SESSION內的廠商金資訊
-$sql = "SELECT * FROM company_cash_management ORDER BY id DESC LIMIT 1";
+$data = [$_SESSION["restaurant_id"]];
+$sql = "SELECT * FROM company_cash_management WHERE restaurant_id=? ORDER BY id DESC LIMIT 1";
 $stmt = $link->prepare($sql);
 try {
-    $stmt->execute();
+    $stmt->execute($data);
     $dCCMResult = $stmt->fetch(PDO::FETCH_ASSOC);
     $_SESSION["dCCM_id"] = $dCCMResult["id"];
     $_SESSION["dCCM_total"] = $dCCMResult["total"];
